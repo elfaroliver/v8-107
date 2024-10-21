@@ -276,4 +276,4 @@ Strengurinn ${isPalindrom ? 'er' : 'er ekki'} samhverfur.`;
 
     // Spyrja hvort notandi vilji prófa aftur
   } while (confirm('Viltu prófa aftur?'));
-}
+} console.log(start());
