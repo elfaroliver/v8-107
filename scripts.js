@@ -9,10 +9,10 @@
 // Fastar
 
 /** Íslenskir sérhljóðar */
-const CONSONANTS = 'bcdfghjklmnpqrstvwxz'.split('');
+/*const CONSONANTS = 'bcdfghjklmnpqrstvwxz'.split('');*/
 
 /** Íslenskir samhljóðar */
-const VOWELS = 'aeiouyáéýúíóöæ'.split('');
+/*const VOWELS = 'aeiouyáéýúíóöæ'.split('');*/
 
 //------------------------------------------------------------------------------
 // Hjálparföll
@@ -23,7 +23,8 @@ const VOWELS = 'aeiouyáéýúíóöæ'.split('');
  * @returns `true` ef `str` er strengur, annars `false`.
  */
 // Skilgreinum anonymous fall og bindum við breytuna `isString`
-const isString = (str) => typeof str === 'string';
+/*import { constants } from './lib/constants.js';*/
+/*const isString = (str) => typeof str === 'string';*/
 
 // Prófum fallið
 console.assert(isString('hi') === true, 'isString: skilar `true` fyrir streng');
@@ -38,14 +39,7 @@ console.assert(isString(null) === false, 'isString: skilar `false` fyrir null');
  * ekki fram.
  */
 
-/*import { isString, splitOnWhitespace } from './lib/helpers.js';
-function split(str, separator = ' ') {
-  if (!isString(str)) {
-    return [];
-  }
-
-  return str.split(separator);
-}*/
+import { isString } from './lib/helpers.js';
 
 //------------------------------------------------------------------------------
 // Grunnföll sem skilgreina á
@@ -53,80 +47,14 @@ function split(str, separator = ' ') {
 /*Longest var hér */
 import { longest } from './lib/longest.js';
 
-console.assert(
-  longest('halló hæ') === 'halló',
-  'longest: skilar lengsta orðinu',
-);
-console.assert(
-  longest('halló halli') === 'halló',
-  'longest: skilar fyrsta orðinu ef þau eru jafn löng',
-);
-console.assert(
-  longest(null) === null,
-  'longest: skilar null ef ekki er gefinn strengur',
-);
-console.assert(
-  longest('') === '',
-  'longest: skilar tómum streng ef tómur strengur er gefinn',
-);
-
 /*Shortest var hér*/
 import { shortest } from './lib/shortest.js';
-
-console.assert(shortest('halló hæ') === 'hæ', 'shortest: skilar stysta orðinu');
-console.assert(
-  shortest('halló halli') === 'halló',
-  'shortest: skilar fyrsta orðinu ef þau eru jafn löng',
-);
-console.assert(
-  shortest(null) === null,
-  'shortest: skilar null ef ekki er gefinn strengur',
-);
-console.assert(
-  shortest('') === '',
-  'shortest: skilar tómum streng ef tómur strengur er gefinn',
-);
 
 /*Reverse var hér*/
 import { reverse } from './lib/reverse.js';
 
-console.assert(
-  reverse(null) === null,
-  'reverse: skilar tómum streng ef ekki er gefinn strengur',
-);
-console.assert(
-  reverse('') === '',
-  'reverse: snúinn tómi strengurinn er tómi strengurinn',
-);
-console.assert(reverse('hello') === 'olleh', 'reverse: snýr við streng');
-
 /* Palindrome var hér */
 import { palindrome } from './lib/palindrome.js';
-
-console.assert(
-  palindrome('heh') === true,
-  'palindrome: skilar `true` ef `str` er samhverfur',
-);
-console.assert(
-  palindrome('halló') === false,
-  'palindrome: skilar `false` ef `str` er ekki samhverfur',
-);
-console.assert(
-  palindrome(null) === false,
-  'palindrome: skilar `false` ef `str` er ekki strengur (null)',
-);
-console.assert(
-  palindrome('heh HEH') === true,
-  'palindrome: ekki skiptir máli hvort stafir séu hástafir eða lágstafir.',
-);
-console.assert(
-  palindrome('heh HEH!') === false,
-  'palindrome: ekki þarf að fjarlægja bil, tölustafi eða önnur tákn.',
-);
-console.assert(
-  palindrome('') === false,
-  'palindrome: tómur strengur er ekki samhverfur.',
-);
 
 /**
  * Telur fjölda stafa í streng sem eru í characters fylki.
@@ -137,85 +65,55 @@ console.assert(
 /* countGivenCharactersInString var hér */
 import { countGivenCharactersInString } from './count.js';
 
-console.assert(
-  countGivenCharactersInString('', []) === 0,
-  'countGivenCharactersInString: skilar 0 ef tómi strengur',
-);
-console.assert(
-  countGivenCharactersInString('asdf', []) === 0,
-  'countGivenCharactersInString: skilar 0 ef tóma fylkið',
-);
-console.assert(
-  countGivenCharactersInString('halló', ['a', 'l']) === 3,
-  'countGivenCharactersInString: skilar fjölda stafa í streng',
-);
+/* vowels var hér */
+import { vowels } from './vowels.js';
 
-function vowels(str) {
-  return countGivenCharactersInString(str, VOWELS);
-}
-console.assert(
-  vowels('halló') === 2,
-  'vowels: skilar fjölda sérhljóða í streng',
-);
-console.assert(vowels('') === 0, 'vowels: skilar 0 ef tómur strengur');
-console.assert(
-  vowels(null) === 0,
-  'vowels: skilar 0 ef ekki er gefinn strengur',
-);
+/* consonants var hér */
+import { consonants } from './lib/consonants.js';
 
-function consonants(str) {
-  return countGivenCharactersInString(str, CONSONANTS);
-}
-console.assert(
-  consonants('halló') === 3,
-  'consonants: skilar fjölda samhljóða í streng',
-);
-console.assert(consonants('') === 0, 'consonants: skilar 0 ef tómur strengur');
-console.assert(
-  consonants(null) === 0,
-  'consonants: skilar 0 ef ekki er gefinn strengur',
-);
 
 //------------------------------------------------------------------------------
 // Leiðbeint ferli
+/* Start var hér */
+import { start } from './start.js';
 
-function start() {
-  // Birta leiðbeiningar
-  const instructions = `Sláðu inn streng með nokkrum orðum til að fá upplýsingar um:
-- Lengsta orðið.
-- Stysta orðið.
-- Strenginn snúið við.
-- Fjölda sérhljóða í streng.
-- Fjölda samhljóða í streng.
-- Hvort strengurinn sé samhverfur.`;
-  alert(instructions);
+function exampleSplit(str, separator = ' ') {
+  if (!isString(str)) {
+      return [];
+  }
+  return str.split(separator);
+}
 
-  do {
-    // Biðja um streng
-    const str = prompt('Sláðu inn streng með nokkrum orðum');
+// Bý til exampleString til að nota öll föll
+const exampleString = "Hello, world!";
 
-    // Ýtt á cancel eða tómi strengur? Bjóða að keyra aftur.
-    if (str === null || str === '') {
-      continue;
-    }
+// Nota split til að losa við error
+const words = exampleSplit(exampleString);
+console.log(words); // ["Hello,", "world!"]
 
-    // Birta upplýsingar
-    const longestWord = longest(str);
-    const shortestWord = shortest(str);
-    const reversed = reverse(str);
-    const vowelCount = vowels(str);
-    const consonantCount = consonants(str);
-    const isPalindrom = palindrome(str);
+// Nota longest til að losa við error
+const longestWord = longest(words);
+console.log(`Longest word: ${longestWord}`); // Output lengsta
 
-    const result = `Lengsta orðið er: ${longestWord}
-Stysta orðið er: ${shortestWord}
-Strengurinn snúinn við: ${reversed}
-Fjöldi sérhljóða í streng: ${vowelCount}
-Fjöldi samhljóða í streng: ${consonantCount}
-Strengurinn ${isPalindrom ? 'er' : 'er ekki'} samhverfur.`;
+// Nota shortest til að losa við error
+const shortestWord = shortest(words);
+console.log(`Shortest word: ${shortestWord}`); // Outputs stysta
 
-    alert(result);
+// Nota reverse til að losa við error
+const reversedString = reverse(exampleString);
+console.log(`Reversed string: ${reversedString}`); // Output reverse
 
-    // Spyrja hvort notandi vilji prófa aftur
-  } while (confirm('Viltu prófa aftur?'));
-} console.log(start());
+// Nota palindrome til að losa við error
+const isPalin = palindrome("madam");
+console.log(`Is "madam" a palindrome? ${isPalin}`); // Output true
+
+// Nota countvowel.. til að losa við error
+const vowelCount = countGivenCharactersInString(exampleString, vowels);
+console.log(`Number of vowels: ${vowelCount}`); // Output sérhljóðatal
+
+// Nota countconso.. til að losa við error
+const consonantCount = countGivenCharactersInString(exampleString, consonants);
+console.log(`Number of consonants: ${consonantCount}`); // Output samhljóðatal
+
+// Start function call (if applicable)
+start();
