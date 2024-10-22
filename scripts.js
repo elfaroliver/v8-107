@@ -37,32 +37,22 @@ console.assert(isString(null) === false, 'isString: skilar `false` fyrir null');
  * @returns {string[]} Fylki af strengjum eða tóma fylkið ef afmarkari kom
  * ekki fram.
  */
+
+/*import { isString, splitOnWhitespace } from './lib/helpers.js';
 function split(str, separator = ' ') {
   if (!isString(str)) {
     return [];
   }
 
   return str.split(separator);
-}
+}*/
 
 //------------------------------------------------------------------------------
 // Grunnföll sem skilgreina á
 
-function longest(str) {
-  if (!isString(str)) {
-    return null;
-  }
+/*Longest var hér */
+import { longest } from './lib/longest.js';
 
-  const words = split(str, ' ');
-
-  let longestWord = '';
-  for (const word of words) {
-    if (word.length > longestWord.length) {
-      longestWord = word;
-    }
-  }
-  return longestWord;
-}
 console.assert(
   longest('halló hæ') === 'halló',
   'longest: skilar lengsta orðinu',
@@ -80,21 +70,9 @@ console.assert(
   'longest: skilar tómum streng ef tómur strengur er gefinn',
 );
 
-function shortest(str) {
-  if (!isString(str)) {
-    return null;
-  }
+/*Shortest var hér*/
+import { shortest } from './lib/shortest.js';
 
-  const words = split(str, ' ');
-
-  let shortestWord = '';
-  for (const word of words) {
-    if (shortestWord === '' || word.length < shortestWord.length) {
-      shortestWord = word;
-    }
-  }
-  return shortestWord;
-}
 console.assert(shortest('halló hæ') === 'hæ', 'shortest: skilar stysta orðinu');
 console.assert(
   shortest('halló halli') === 'halló',
@@ -109,13 +87,9 @@ console.assert(
   'shortest: skilar tómum streng ef tómur strengur er gefinn',
 );
 
-function reverse(str) {
-  if (!isString(str)) {
-    return null;
-  }
+/*Reverse var hér*/
+import { reverse } from './lib/reverse.js';
 
-  return str.split('').reverse().join('');
-}
 console.assert(
   reverse(null) === null,
   'reverse: skilar tómum streng ef ekki er gefinn strengur',
@@ -126,26 +100,9 @@ console.assert(
 );
 console.assert(reverse('hello') === 'olleh', 'reverse: snýr við streng');
 
-function palindrome(str) {
-  if (!isString(str)) {
-    return false;
-  }
+/* Palindrome var hér */
+import { palindrome } from './lib/palindrome.js';
 
-  if (str === '') {
-    return false;
-  }
-
-  const reversed = reverse(str);
-
-  // Hér lendum við í því að þar sem `reverse` *getur* skilað `null` þá ættum
-  // við að athuga það líka þó svo að við vitum að við sendum inn streng.
-  // Ef kveikt er á „JS Check“ í VSCode þá kemur villumelding ef við gerum ekki.
-  if (!isString(reversed)) {
-    return false;
-  }
-
-  return str.toLocaleLowerCase() === reversed.toLocaleLowerCase();
-}
 console.assert(
   palindrome('heh') === true,
   'palindrome: skilar `true` ef `str` er samhverfur',
@@ -177,23 +134,8 @@ console.assert(
  * @param {string[]} characters Fylki af stöfum sem á að telja
  * @returns {number} Fjöldi stafa í streng sem eru í characters
  */
-function countGivenCharactersInString(str, characters) {
-  if (!isString(str)) {
-    return 0;
-  }
-
-  const splitStr = split(str, '');
-
-  let count = 0;
-
-  for (const char of splitStr) {
-    if (characters.includes(char)) {
-      count += 1;
-    }
-  }
-
-  return count;
-}
+/* countGivenCharactersInString var hér */
+import { countGivenCharactersInString } from './count.js';
 
 console.assert(
   countGivenCharactersInString('', []) === 0,
