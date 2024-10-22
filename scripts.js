@@ -63,10 +63,10 @@ import { palindrome } from './lib/palindrome.js';
  * @returns {number} Fjöldi stafa í streng sem eru í characters
  */
 /* countGivenCharactersInString var hér */
-import { countGivenCharactersInString } from './count.js';
+import { countGivenCharactersInString } from './lib/count.js';
 
 /* vowels var hér */
-import { vowels } from './vowels.js';
+import { vowels } from './lib/vowels.js';
 
 /* consonants var hér */
 import { consonants } from './lib/consonants.js';
@@ -75,7 +75,7 @@ import { consonants } from './lib/consonants.js';
 //------------------------------------------------------------------------------
 // Leiðbeint ferli
 /* Start var hér */
-import { start } from './start.js';
+import { start } from './lib/start.js';
 
 function exampleSplit(str, separator = ' ') {
   if (!isString(str)) {
@@ -83,7 +83,7 @@ function exampleSplit(str, separator = ' ') {
   }
   return str.split(separator);
 }
-
+/*
 // Bý til exampleString til að nota öll föll
 const exampleString = "Hello, world!";
 
@@ -116,4 +116,83 @@ const consonantCount = countGivenCharactersInString(exampleString, consonants);
 console.log(`Number of consonants: ${consonantCount}`); // Output samhljóðatal
 
 // Start function call (if applicable)
-start();
+start();*/
+
+
+/*textarea.addEventListener('input', () => {
+  console.log('textarea inniheldur:', textarea.value);
+});*/
+
+/*const textareaElement = document.querySelector('textarea');*/
+const formElement = document.querySelector('form');
+
+function submitHandler(event) {
+  event.preventDefault();
+  updateOutput();
+  //const { target } = event;
+  //const textareaElement = target.querySelector('textarea');
+  //console.log('textareaElement inniheldur', textareaElement.value);
+}
+
+//const textareaElement = document.querySelector('textarea')
+
+//formElement.addEventListener('submit', submitHandler);
+
+formElement.addEventListener('submit', (event) => {
+  event.preventDefault(); // Prevent default form submission
+  updateOutput(); // Call the function to analyze the input
+  outputElement.classList.remove('hidden'); // Show the output
+});
+
+formElement.addEventListener('reset', () => {
+  // Clear the textarea and output
+  textareaElement.value = '';
+  inputDisplay.textContent = '';
+  longestElement.textContent = '';
+  shortestElement.textContent = '';
+  vowelsElement.textContent = '';
+  consonantsElement.textContent = '';
+  palindromeElement.textContent = '';
+  reversedElement.textContent = '';
+});
+
+const textareaElement = document.getElementById('string');
+const outputElement = document.querySelector('.output');
+const inputDisplay = document.querySelector('.input');
+const longestElement = document.querySelector('.longest');
+const shortestElement = document.querySelector('.shortest');
+const vowelsElement = document.querySelector('.vowels');
+const consonantsElement = document.querySelector('.consonants');
+const palindromeElement = document.querySelector('.palindrome');
+const reversedElement = document.querySelector('.reversed');
+
+function updateOutput() {
+  //outputElement.textContent = textareaElement.value;
+  const inputValue = textareaElement.value;
+    inputDisplay.textContent = inputValue; // Display the current input
+
+    // Reikna gildi úr imported functions
+    const words = inputValue.split(/\s+/).filter(Boolean);
+    longestElement.textContent = longest(inputValue);
+    shortestElement.textContent = shortest(inputValue);
+    vowelsElement.textContent = vowels(inputValue);
+    consonantsElement.textContent = consonants(inputValue);
+    palindromeElement.textContent = palindrome(inputValue) ? 'samhverfur' : 'ekki samhverfur';
+    reversedElement.textContent = reverse(inputValue);
+}
+
+textareaElement.addEventListener('input', updateOutput);
+
+function removeHidden(el) {
+  el.classList.remove('hidden');
+}
+
+if (outputElement) {
+  removeHidden(outputElement);
+}
+
+/*const longestElement = document.querySelector('.longest');
+if (longestElement) {
+  longestElement.textContent = '';
+}*/
+
