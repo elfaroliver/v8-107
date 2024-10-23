@@ -27,9 +27,9 @@
 /*const isString = (str) => typeof str === 'string';*/
 
 // Prófum fallið
-console.assert(isString('hi') === true, 'isString: skilar `true` fyrir streng');
+/*console.assert(isString('hi') === true, 'isString: skilar `true` fyrir streng');
 console.assert(isString(42) === false, 'isString: skilar `false` fyrir tölu');
-console.assert(isString(null) === false, 'isString: skilar `false` fyrir null');
+console.assert(isString(null) === false, 'isString: skilar `false` fyrir null');*/
 
 /**
  * Öruggt fall sem skilar fylki af strengjum úr gefnum streng, skipt upp með
@@ -75,83 +75,25 @@ import { consonants } from './lib/consonants.js';
 //------------------------------------------------------------------------------
 // Leiðbeint ferli
 /* Start var hér */
-import { start } from './lib/start.js';
+//import { start } from './lib/start.js';
 
-function exampleSplit(str, separator = ' ') {
-  if (!isString(str)) {
-      return [];
-  }
-  return str.split(separator);
-}
-/*
-// Bý til exampleString til að nota öll föll
-const exampleString = "Hello, world!";
-
-// Nota split til að losa við error
-const words = exampleSplit(exampleString);
-console.log(words); // ["Hello,", "world!"]
-
-// Nota longest til að losa við error
-const longestWord = longest(words);
-console.log(`Longest word: ${longestWord}`); // Output lengsta
-
-// Nota shortest til að losa við error
-const shortestWord = shortest(words);
-console.log(`Shortest word: ${shortestWord}`); // Outputs stysta
-
-// Nota reverse til að losa við error
-const reversedString = reverse(exampleString);
-console.log(`Reversed string: ${reversedString}`); // Output reverse
-
-// Nota palindrome til að losa við error
-const isPalin = palindrome("madam");
-console.log(`Is "madam" a palindrome? ${isPalin}`); // Output true
-
-// Nota countvowel.. til að losa við error
-const vowelCount = countGivenCharactersInString(exampleString, vowels);
-console.log(`Number of vowels: ${vowelCount}`); // Output sérhljóðatal
-
-// Nota countconso.. til að losa við error
-const consonantCount = countGivenCharactersInString(exampleString, consonants);
-console.log(`Number of consonants: ${consonantCount}`); // Output samhljóðatal
-
-// Start function call (if applicable)
-start();*/
-
-
-/*textarea.addEventListener('input', () => {
-  console.log('textarea inniheldur:', textarea.value);
-});*/
-
-/*const textareaElement = document.querySelector('textarea');*/
 const formElement = document.querySelector('form');
 
-function submitHandler(event) {
-  event.preventDefault();
-  updateOutput();
-  //const { target } = event;
-  //const textareaElement = target.querySelector('textarea');
-  //console.log('textareaElement inniheldur', textareaElement.value);
-}
-
-//const textareaElement = document.querySelector('textarea')
-
-//formElement.addEventListener('submit', submitHandler);
-
 formElement.addEventListener('submit', (event) => {
-  event.preventDefault(); // Prevent default form submission
-  updateOutput(); // Call the function to analyze the input
-  outputElement.classList.remove('hidden'); // Show the output
+  event.preventDefault(); // Hættir við default submit
+  updateOutput(); // Callar function til að greina
+  outputElement.classList.remove('hidden'); // Sýnir output
 });
 
 formElement.addEventListener('reset', () => {
-  // Clear the textarea and output
+  // Hreinsar textarea og output
   textareaElement.value = '';
   inputDisplay.textContent = '';
   longestElement.textContent = '';
   shortestElement.textContent = '';
   vowelsElement.textContent = '';
   consonantsElement.textContent = '';
+  countElement.textContent = '';
   palindromeElement.textContent = '';
   reversedElement.textContent = '';
 });
@@ -163,22 +105,35 @@ const longestElement = document.querySelector('.longest');
 const shortestElement = document.querySelector('.shortest');
 const vowelsElement = document.querySelector('.vowels');
 const consonantsElement = document.querySelector('.consonants');
+const countElement = document.querySelector('.count');
 const palindromeElement = document.querySelector('.palindrome');
 const reversedElement = document.querySelector('.reversed');
 
 function updateOutput() {
-  //outputElement.textContent = textareaElement.value;
   const inputValue = textareaElement.value;
-    inputDisplay.textContent = inputValue; // Display the current input
+  
+    // Sýnir núverandi input
+    inputDisplay.textContent = inputValue; 
 
     // Reikna gildi úr imported functions
+    // Ef characters er fjarlægt, virka palindrome og reversed ekki. Veit ekki hvers vegna
+    const characters = [vowels, consonants];
     const words = inputValue.split(/\s+/).filter(Boolean);
+
+    // Prentar lengsta orð
     longestElement.textContent = longest(inputValue);
+    // Prentar stysta orð
     shortestElement.textContent = shortest(inputValue);
+    // Prentar fjölda sérhljóða
     vowelsElement.textContent = vowels(inputValue);
+    // Prentar fjölda samhljóða
     consonantsElement.textContent = consonants(inputValue);
+    // Prentar fjölda stafa(eina sem virkar ekki)
+    countElement.textContent = countGivenCharactersInString(inputValue, characters).toString();
+    // Prentar hvort input er palindrome með 'samhverfur' eða 'ekki samhverfur'
     palindromeElement.textContent = palindrome(inputValue) ? 'samhverfur' : 'ekki samhverfur';
-    reversedElement.textContent = reverse(inputValue);
+    // Prentar speglað input. T.d. halló = óllah
+    reversedElement.textContent = reverse(inputValue) || '';
 }
 
 textareaElement.addEventListener('input', updateOutput);
@@ -186,13 +141,10 @@ textareaElement.addEventListener('input', updateOutput);
 function removeHidden(el) {
   el.classList.remove('hidden');
 }
-
+  
 if (outputElement) {
   removeHidden(outputElement);
 }
 
-/*const longestElement = document.querySelector('.longest');
-if (longestElement) {
-  longestElement.textContent = '';
-}*/
+//start()
 
